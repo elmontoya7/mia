@@ -1,18 +1,34 @@
-<template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+<template lang="pug">
+  b-table(show-empty='', :items="parsedUsers", :fields="fields" striped bordered)
+    template(slot='empty', slot-scope='scope')
+      h4 Sin elementos
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+import users from '@/data/registered-users'
+import schema from '@/data/user-schema'
 
 export default {
-  name: 'home',
-  components: {
-    HelloWorld
+  data () {
+    return {
+
+    }
+  },
+  computed: {
+    parsedUsers () {
+      return users
+    },
+    fields () {
+      let f = []
+
+      for (let data of schema) {
+        for (let item of data.items) {
+          f.push(item)
+        }
+      }
+
+      return f
+    }
   }
 }
 </script>
